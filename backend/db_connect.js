@@ -1,9 +1,12 @@
-import * as dbConfig from './config/db.config';
+import mysql from 'mysql';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const pool = mysql.createPool({
     connectionLimit: 10,
-    host: dbConfig.HOST,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
-    database: dbConfig.DB,
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
 });

@@ -1,5 +1,6 @@
-import express, { json, urlencoded } from "express";
+import express, {json, urlencoded } from "express";
 import cors from "cors";
+import routers from "./routers/routers.js";
 
 const app = express();
 
@@ -16,9 +17,8 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my application." });
-});
+app.use("/", routers);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
