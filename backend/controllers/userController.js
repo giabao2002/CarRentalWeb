@@ -41,7 +41,7 @@ export const login = (req, res) => {
   });
 };
 
-export const signin = (req, res) => {
+export const register = (req, res) => {
   const { username, password, email } = req.body;
 
   pool.getConnection((err, connection) => {
