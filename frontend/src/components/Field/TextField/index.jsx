@@ -30,7 +30,7 @@ export default function CustomField(props) {
 
   if (type === "date") {
     return (
-      <Grid xs={width} sx={{ margin: "10px 2px" }}>
+      <Grid item xs={width} sx={{ margin: "10px 2px" }}>
         <TextField
           name={name}
           label={label}
@@ -40,7 +40,7 @@ export default function CustomField(props) {
           value={value}
           onChange={handleChange}
           fullWidth
-          error={isEmpty === name ? true : false}
+          error={isEmpty === name}
           helperText={isEmpty === name && "Không được để trống!"}
         />
       </Grid>
@@ -93,7 +93,7 @@ export default function CustomField(props) {
     );
   }
   return (
-    <Grid xs={width} sx={{ margin: "10px 2px" }}>
+    <Grid item xs={width} sx={{ margin: "10px 2px" }}>
       <TextField
         name={name}
         label={label}

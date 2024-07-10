@@ -5,7 +5,7 @@ import routers from "./routers/routers.js";
 const app = express();
 
 let corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:5173"
 };
 
 app.use(cors(corsOptions));
@@ -15,6 +15,7 @@ app.use(json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(urlencoded({ extended: true }));
+
 
 // simple route
 app.use("/", routers);

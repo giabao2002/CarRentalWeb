@@ -1,20 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from 'react-dom/client'
 import App from "./pages/App.jsx";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import reducers from "./redux/reducers";
+import reducers from "./redux/reducers/index.js";
 import createSagaMiddleware from "redux-saga";
-import mySaga from "./redux/sagas";
+import mySaga from "./redux/sagas/index.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: reducers,
-  middleware: (getDefaultMiddleWare) => {
-    return getDefaultMiddleWare({ thunk: false }).prepend(sagaMiddleware);
-  },
+  middleware: getDefaultMiddleWare => getDefaultMiddleWare({ thunk: false }).prepend(sagaMiddleware),
 });
 
 sagaMiddleware.run(mySaga);

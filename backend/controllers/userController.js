@@ -34,8 +34,13 @@ export const login = (req, res) => {
         if (!isMatch) {
           return res.status(401).send("Invalid credentials");
         }
-
-        res.status(200).send("Login successful");
+        res.status(200).json({
+          message: "Login successful",
+          data: {
+            username: user.username,
+            userid: user.id,
+          },
+        });
       });
     });
   });

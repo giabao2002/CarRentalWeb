@@ -12,28 +12,18 @@ import {
   Box,
   CircularProgress,
 } from "@mui/material";
-import { Bolt } from "@mui/icons-material";
 
 export default function Login() {
-  const user = useSelector(userState$)?.info;
+  const user = useSelector(userState$);
   const [values, setValues] = React.useState({
     email: "",
     password: "",
-    role: false,
   });
   const [isLoading, setLoading] = useState(false);
   const [isEmpty, setEmpty] = useState("");
   const dispatch = useDispatch();
 
   const formList = [
-    {
-        name: "username",
-        label: "Tên người dùng",
-        type: "text",
-        width: 12,
-        value: values.username,
-        required: true,
-      },
     {
       name: "email",
       label: "Email",
@@ -60,7 +50,7 @@ export default function Login() {
   };
 
   const handleLogin = React.useCallback(() => {
-    for (var key in values) {
+    for (let key in values) {
       if (values[key] === "") {
         setEmpty(key);
         break;
@@ -72,9 +62,8 @@ export default function Login() {
       setLoading(true);
       dispatch(login.loginRequest(values));
       setValues({
-        userName: "",
+        email: "",
         password: "",
-        role: false,
       });
     }
   }, [values, dispatch]);
@@ -91,9 +80,8 @@ export default function Login() {
       setTimeout(() => {
         setLoading(false);
         setValues({
-          userName: "",
+          email: "",
           password: "",
-          role: false,
         });
       }, 4000);
     }
@@ -101,18 +89,6 @@ export default function Login() {
 
   return (
     <Grid item xs={12} className="container" sx={{ height: "98vh" }}>
-      <Typography
-        style={{
-          fontSize: 28,
-          fontWeight: "bold",
-          backgroundColor: "green",
-          color: "white",
-          padding: "5px 10px",
-        }}
-      >
-        <Bolt fontSize="large" />
-        EEnergy
-      </Typography>
       <Paper
         elevation={6}
         sx={{
@@ -133,7 +109,7 @@ export default function Login() {
         >
           Đăng nhập
         </Typography>
-        {formList.map((elm) => (
+        {formList.map( elm => (
           <CustomField
             key={elm.name} 
             name={elm.name}
@@ -149,7 +125,7 @@ export default function Login() {
         <Button
           onClick={handleLogin}
           disabled={isLoading}
-          variant="contained"
+          letiant="contained"
           color="success"
           sx={{ marginTop: "10px" }}
         >
@@ -162,9 +138,6 @@ export default function Login() {
             cursor: "pointer",
           }}
         >
-          <Link underline="none" margin={"10px 0"}>
-            Quên mật khẩu?
-          </Link>
           <Link underline="none" margin={"10px 0"} href="/register">
             Đăng ký tài khoản
           </Link>
