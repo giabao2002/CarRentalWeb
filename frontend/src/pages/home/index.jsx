@@ -46,9 +46,7 @@ export default function Home() {
           alignItems="center"
           justifyContent="center"
         >
-          <Grid item xs={12} width="100%">
-            <MyAppBar />
-          </Grid>
+          <Grid item xs={12} width="100%"></Grid>
         </Grid>
       )}
     </Grid>

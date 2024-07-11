@@ -6,10 +6,12 @@ import { ROUTER } from "../router";
 import Home from "./home";
 import Login from "./sign/login";
 import Register from "./sign/register";
+import MyAppBar from "../components/Appbar";
 
 function App () {
   return (
     <Grid container>
+      <MyAppBar />
       <Routes>
         <Route path={ROUTER.HOME} element={<Home />} />
         <Route exact path={ROUTER.LOGIN} element={<Login />} />
