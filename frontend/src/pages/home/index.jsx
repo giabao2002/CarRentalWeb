@@ -2,9 +2,13 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Typography, LinearProgress, Box } from "@mui/material";
 
-import MyAppBar from "../../components/Appbar";
 import { getAllCars } from "../../redux/actions";
 import { productState$ } from "../../redux/selector";
+
+import HelpText from "../../components/HelpText";
+import Footer from "../../components/Footer";
+
+import background from "../../assets/interface/backgroundHome.jpg";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -23,14 +27,13 @@ export default function Home() {
     }, 3000);
   }, [cars]);
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ marginTop: "2px" }}>
       {isLoading ? (
         <Grid
           container
           direction="column"
           alignItems="center"
           justifyContent="center"
-          height="101.6vh"
         >
           <Box sx={{ width: "20%" }}>
             <LinearProgress />
@@ -42,11 +45,23 @@ export default function Home() {
       ) : (
         <Grid
           container
-          direction="column"
+          direction="row"
           alignItems="center"
           justifyContent="center"
         >
-          <Grid item xs={12} width="100%"></Grid>
+          <Grid item xs={12} width="100%">
+            <Grid
+              sx={{
+                backgroundImage: `url(${background})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "60vh",
+                width: "100%",
+              }}
+            ></Grid>
+          </Grid>
+          <HelpText />
+          <Footer />
         </Grid>
       )}
     </Grid>

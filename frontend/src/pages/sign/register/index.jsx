@@ -11,6 +11,8 @@ import {
   CircularProgress,
 } from "@mui/material";
 
+import background from "../../../assets/interface/backgroundSign.jpg";
+
 export default function Register() {
   const user = useSelector(userState$)?.info;
   const [values, setValues] = React.useState({
@@ -24,13 +26,13 @@ export default function Register() {
 
   const formList = [
     {
-        name: "username",
-        label: "Tên người dùng",
-        type: "text",
-        width: 12,
-        value: values.username,
-        required: true,
-      },
+      name: "username",
+      label: "Tên người dùng",
+      type: "text",
+      width: 12,
+      value: values.username,
+      required: true,
+    },
     {
       name: "email",
       label: "Email",
@@ -49,7 +51,7 @@ export default function Register() {
     },
   ];
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     if (event.target) {
       const { name, value } = event.target;
       setValues({ ...values, [name]: value });
@@ -97,30 +99,42 @@ export default function Register() {
   }, [isLoading, user]);
 
   return (
-    <Grid item xs={12} className="container" sx={{ height: "98vh" }}>
+    <Grid
+      item
+      xs={12}
+      className="container"
+      sx={{
+        height: "89.7vh",
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        bacckgroundPosition: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      >
       <Paper
         elevation={6}
         sx={{
-          padding: "15px",
+          padding: "30px 20px",
           width: "20%",
           display: "flex",
           flexDirection: "column",
-          margin: "10% auto 20px auto",
         }}
       >
         <Typography
           style={{
             fontWeight: "bold",
             fontSize: 24,
-            fontFamily: "sans-serif",
-            color: "green",
+            fontFamily: "Arial",
+            color: "#5ACDAB",
           }}
         >
           Đăng ký
         </Typography>
-        {formList.map(elm => (
+        {formList.map((elm) => (
           <CustomField
-            key={elm.name} 
+            key={elm.name}
             name={elm.name}
             label={elm.label}
             type={elm.type}
@@ -135,10 +149,9 @@ export default function Register() {
           onClick={handleRegister}
           disabled={isLoading}
           variant="contained"
-          color="success"
-          sx={{ marginTop: "10px" }}
+          sx={{ marginTop: "10px", backgroundColor: "#5ACDAB" }}
         >
-          {isLoading ? <CircularProgress color="inherit" /> : "Submit"}
+          {isLoading ? <CircularProgress color="inherit" /> : "Đăng ký"}
         </Button>
       </Paper>
     </Grid>

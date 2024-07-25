@@ -1,27 +1,36 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+
+import {
+  MenuItem,
+  Tooltip,
+  Button,
+  Container,
+  Menu,
+  Typography,
+  IconButton,
+  Toolbar,
+  Box,
+  AppBar,
+} from "@mui/material";
+
+import {CarRental, Logout} from "@mui/icons-material";
 
 const pages = [
-    {
-        url: '/',
-        title: 'Trang chủ'
-    },
-    {
-        url: '/',
-        title: 'Ký gửi xe'
-    }
+  {
+    url: "/",
+    title: "Trang chủ",
+  },
+  {
+    url: "/",
+    title: "Ký gửi xe",
+  },
 ];
-const settings = ["Logout"];
+const settings = [
+  {
+    title: "Logout",
+    icon: <Logout />,
+  },
+];
 
 function MyAppBar() {
   const [user, setUser] = React.useState(null);
@@ -36,16 +45,26 @@ function MyAppBar() {
   };
 
   React.useEffect(() => {
-    localStorage.getItem("user") && setUser(localStorage.getItem("user"));
+    localStorage.getItem("user") &&
+      setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
   return (
-    <AppBar position="static" sx={{backgroundColor:'transparent', color: 'green'}}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "transparent", color: "green", zIndex: 10 }}
+    >
       <Container maxWidth="xl" sx={{ paddingTop: "10px" }}>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <CarRental
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              color: "#5ACDAB",
+            }}
+          />
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="a"
             href="/"
@@ -55,11 +74,11 @@ function MyAppBar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#5ACDAB",
               textDecoration: "none",
             }}
           >
-            LOGO
+            RentalCar
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
@@ -74,35 +93,59 @@ function MyAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Typography textAlign="center" color="white">
-                  {user ? user.username: ''}
-                </Typography>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            {user ? (
+              <>
+                <Tooltip>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Typography textAlign="center" color="black">
+                      {user.username ? user.username : ""}
+                    </Typography>
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting, index) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" sx={{display:'flex', justifyContent:'center'}}>
+                        {setting.icon}
+                        {setting.title}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  href="/login"
+                  sx={{ mr: 1, backgroundColor: "#5ACDAB" }}
+                >
+                  Đăng nhập
+                </Button>
+                <Button
+                  variant="outlined"
+                  href="/register"
+                  sx={{ borderColor: "#5ACDAB", color: "#5ACDAB" }}
+                >
+                  Đăng ký
+                </Button>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>

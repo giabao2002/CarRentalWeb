@@ -8,10 +8,10 @@ import {
   Paper,
   Typography,
   Button,
-  Link,
-  Box,
   CircularProgress,
 } from "@mui/material";
+
+import background from '../../../assets/interface/backgroundSign.jpg';
 
 export default function Login() {
   const user = useSelector(userState$);
@@ -88,30 +88,42 @@ export default function Login() {
   }, [isLoading, user]);
 
   return (
-    <Grid item xs={12} className="container" sx={{ height: "98vh" }}>
+    <Grid
+      item
+      xs={12}
+      className="container"
+      sx={{
+        height: "89.7vh",
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        bacckgroundPosition: "center",
+        display: "flex",
+        justifyContent: "center", 
+        alignItems: "center",
+      }}
+    >
       <Paper
         elevation={6}
         sx={{
-          padding: "15px",
+          padding: "40px 20px",
           width: "20%",
           display: "flex",
           flexDirection: "column",
-          margin: "10% auto 20px auto",
         }}
       >
         <Typography
           style={{
             fontWeight: "bold",
             fontSize: 24,
-            fontFamily: "sans-serif",
-            color: "green",
+            fontFamily: "Arial",
+            color: "#5ACDAB",
           }}
         >
           Đăng nhập
         </Typography>
-        {formList.map( elm => (
+        {formList.map((elm) => (
           <CustomField
-            key={elm.name} 
+            key={elm.name}
             name={elm.name}
             label={elm.label}
             type={elm.type}
@@ -125,23 +137,11 @@ export default function Login() {
         <Button
           onClick={handleLogin}
           disabled={isLoading}
-          letiant="contained"
-          color="success"
-          sx={{ marginTop: "10px" }}
+          variant="contained"
+          sx={{ marginTop: "10px", backgroundColor: "#5ACDAB" }}
         >
-          {isLoading ? <CircularProgress color="inherit" /> : "Submit"}
+          {isLoading ? <CircularProgress color="inherit" /> : "Đăng nhập"}
         </Button>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            cursor: "pointer",
-          }}
-        >
-          <Link underline="none" margin={"10px 0"} href="/register">
-            Đăng ký tài khoản
-          </Link>
-        </Box>
       </Paper>
     </Grid>
   );

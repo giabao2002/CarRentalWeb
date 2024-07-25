@@ -11,7 +11,7 @@ export function* fetchUserSaga(action) {
       "user",
       JSON.stringify({
         username: user.data?.data.username,
-        userId: user.data?.data.id,
+        userId: user.data?.data.userid,
       })
     );
     window.location.href = "/";
