@@ -84,7 +84,7 @@ function MyAppBar() {
             {pages.map((page, index) => (
               <Button
                 key={index}
-                sx={{ color: "black", display: "block" }}
+                sx={{ color: "black", display: "block", textTransform: "none", fontWeight: 500 }}
                 href={page.url}
               >
                 {page.title}

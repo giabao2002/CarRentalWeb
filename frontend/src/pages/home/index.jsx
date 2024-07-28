@@ -5,6 +5,7 @@ import { Grid, Typography, LinearProgress, Box } from "@mui/material";
 import { getAllCars } from "../../redux/actions";
 import { productState$ } from "../../redux/selector";
 
+import Search from "../../components/Search";
 import HelpText from "../../components/HelpText";
 import Footer from "../../components/Footer";
 
@@ -51,6 +52,9 @@ export default function Home() {
         >
           <Grid item xs={12} width="100%">
             <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 backgroundImage: `url(${background})`,
                 backgroundSize: "cover",
@@ -58,7 +62,9 @@ export default function Home() {
                 height: "60vh",
                 width: "100%",
               }}
-            ></Grid>
+            >
+              <Search />
+            </Grid>
           </Grid>
           <HelpText />
           <Footer />
