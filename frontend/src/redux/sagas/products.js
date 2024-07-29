@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects";
-import { getAllCars } from "../actions";
+import { getAllCars, getAreas } from "../actions";
 import * as api from "../../api";
 
 export function* getAllCarsSaga(action){
@@ -8,5 +8,14 @@ export function* getAllCarsSaga(action){
         yield put(getAllCars.getAllCarsSuccess(users.data.data));
     } catch (error) {
         yield put(getAllCars.getAllCarsFailure(error));
+    }
+}
+
+export function* getAreasSaga(action){
+    try {
+        const areas = yield call(api.fetchAreas);
+        yield put(getAreas.getAreasSuccess(areas.data));
+    } catch (error) {
+        yield put(getAreas.getAreasFailure(error));
     }
 }

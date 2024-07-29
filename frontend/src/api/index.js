@@ -12,3 +12,4 @@ const HEADER = {
 export const fetchUser = payload => axios.post(`${HOST}/login`, payload, HEADER);
 export const fetchRegister = payload => axios.post(`${HOST}/register`, payload, HEADER);
 export const fetchAllCars = () => axios.get(`${HOST}/`, HEADER);
+export const fetchAreas = () => axios.get(`${HOST}/areas`, HEADER);

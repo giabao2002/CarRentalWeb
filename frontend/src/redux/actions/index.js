@@ -24,4 +24,10 @@ export const getAllCars = createActions({
   getAllCarsFailure: err => err,
 });
 
+export const getAreas = createActions({
+  getAreasRequest: null,
+  getAreasSuccess: payload => payload,
+  getAreasFailure: err => err,
+});
+
 export const logout = createAction("LOGOUT");

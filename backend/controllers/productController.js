@@ -7,7 +7,17 @@ export const getAll = (req, res) => {
             connection.release();
             if (err) throw err;
             res.send(rows);
-            console.log('Data received from Db');
         });
     })
+};
+
+export const getAreas = (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) throw err;
+        connection.query('SELECT * FROM areas', (err, rows) => {
+            connection.release();
+            if (err) throw err;
+            res.send(rows);
+        });
+    })  
 };

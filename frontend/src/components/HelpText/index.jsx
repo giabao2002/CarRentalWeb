@@ -120,7 +120,6 @@ export default function HelpText() {
         container
         spacing={4}
         sx={{ mt: 4, ml: "auto", mr: "auto" }}
-        xs={8}
         alignItems="center"
         justifyContent="center"
       >

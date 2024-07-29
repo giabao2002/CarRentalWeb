@@ -1,5 +1,7 @@
 import React from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getAreas } from "../../redux/actions";
+import { productState$ } from "../../redux/selector";
 import {
   Box,
   Button,
@@ -13,7 +15,7 @@ import {
   IconButton,
   InputAdornment,
   Typography,
-  Grid
+  Grid,
 } from "@mui/material";
 
 import {
@@ -45,8 +47,8 @@ const style = {
   textTransform: "none",
 };
 
-
 export default function SearchCar() {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(null);
   const [location, setLocation] = React.useState(null);
@@ -54,6 +56,9 @@ export default function SearchCar() {
   const [returnDate, setReturnDate] = React.useState(new Date());
   const [pickupTime, setPickupTime] = React.useState(new Date());
   const [returnTime, setReturnTime] = React.useState(new Date());
+  const areas = useSelector(productState$)?.areas;
+
+  console.log(areas);
 
   const calculateDuration = () => {
     const pickupDateTime = new Date(pickupDate);
@@ -66,8 +71,6 @@ export default function SearchCar() {
 
     return formatDistance(pickupDateTime, returnDateTime, { addSuffix: false });
   };
-
-  const locations = [];
 
   const handleClickOpen = (val) => {
     setOpen(true);
@@ -82,6 +85,12 @@ export default function SearchCar() {
   const handleChange = (event) => {
     setLocation(event.target.value);
   };
+
+  React.useEffect(() => {
+    dispatch(getAreas.getAreasRequest());
+  }, []);
+
+  console.log(areas);
   return (
     <Box width="60%" bgcolor="white" p={2} borderRadius={2}>
       <Button
@@ -137,10 +146,10 @@ export default function SearchCar() {
         </IconButton>
         <DialogContent>
           <FormControl fullWidth sx={{ marginTop: "10px", width: "30vw" }}>
-            {selectedValue === "location" ? (
+            {selectedValue === "location" && (
               <Autocomplete
-                options={locations}
-                getOptionLabel={(option) => option.title}
+                options={areas}
+                getOptionLabel={(option) => option.name}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -162,14 +171,20 @@ export default function SearchCar() {
                 renderOption={(props, option) => (
                   <Box component="li" {...props}>
                     <LocationOn sx={{ mr: 2, color: "#5ACDAB" }} />
-                    <Typography variant="body2">{option.title}</Typography>
+                    <Typography variant="body2">{option.name}</Typography>
                   </Box>
                 )}
                 onChange={handleChange}
               />
-            ) : (
+            )}
+            {selectedValue === "time" && (
               <Box>
-                <Typography variant="body2" color="textSecondary" gutterBottom mb={3}>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  gutterBottom
+                  mb={3}
+                >
                   Tiết kiệm đến 50% nếu chọn 4h, 8h, 12h, 24h bắt đầu từ lúc
                   nhận xe, nhận và trả xe 24/24
                 </Typography>
