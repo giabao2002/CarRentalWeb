@@ -56,9 +56,7 @@ export default function SearchCar() {
   const [returnDate, setReturnDate] = React.useState(new Date());
   const [pickupTime, setPickupTime] = React.useState(new Date());
   const [returnTime, setReturnTime] = React.useState(new Date());
-  const areas = useSelector(productState$)?.areas;
-
-  console.log(areas);
+  const {areas} = useSelector(productState$);
 
   const calculateDuration = () => {
     const pickupDateTime = new Date(pickupDate);
@@ -90,7 +88,6 @@ export default function SearchCar() {
     dispatch(getAreas.getAreasRequest());
   }, []);
 
-  console.log(areas);
   return (
     <Box width="60%" bgcolor="white" p={2} borderRadius={2}>
       <Button
